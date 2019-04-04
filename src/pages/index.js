@@ -2,12 +2,12 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Timer from "../components/Timer"
+import { Pomodoro } from "../components/Pomodoro"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <Timer initialPomodoro={1500} />
+    <Pomodoro defaultPomodoro={1500} />
   </Layout>
 )
 
