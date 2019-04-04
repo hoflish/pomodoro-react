@@ -1,11 +1,9 @@
-import React from "react";
+import React from "react"
 
-import { format } from "../../utils";
+import { format } from "../../utils"
 
 const PomodoroTimer = ({ timeInSeconds }) => (
-    <div className="timer">
-        {format(timeInSeconds)}
-    </div>
-);
+  <div className="timer">{format(timeInSeconds)}</div>
+)
 
-export default PomodoroTimer;
+export default PomodoroTimer

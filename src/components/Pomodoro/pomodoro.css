@@ -1,82 +1,99 @@
-button {
-    padding: 0;
-    border: none;
-    font: inherit;
-    color: inherit;
-    background-color: transparent;
-    /* show a hand cursor on hover; some argue that we
-  should keep the default arrow cursor for buttons */
-    cursor: pointer;
+.container {
+    border-radius: 6px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    max-width: 500px;
+    overflow: hidden;
+    padding: 20px 8px;
+    margin: 0 auto;
 }
 
-.btn {
-    /* default for <button>, but useful for <a> */
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-
-    /* create a small space when buttons wrap on 2 lines */
-    margin: 2px 0;
-
-    /* invisible border (will be colored on hover/focus) */
-    border: solid 1px transparent;
-    border-radius: 3px;
-
-    /* size comes from text & padding (no width/height) */
-    padding: 0.2em 1em;
-
-    /* make sure colors have enough contrast! */
-    color: #ffffff;
-    background-color: #9555af;
-
-    /* all browsers: remove the default outline since
-      we are rolling our own focus styles */
-    outline: none;
+.timer {
+    font-size: 80px;
+    line-height: 80px;
+    font-weight: bold;
+    word-spacing: -.1em;
+    margin: 40px 0;
 }
 
-.btn:hover {
-    color: #9555af;
-    border-color: currentColor;
-    background-color: white;
+.player-container {
+    display: flex;
+    justify-content: center;
 }
 
-.btn:hover,
-.btn:focus {
-    color: #9555af;
-    border-color: currentColor;
-    background-color: white;
-}
-
-/* Firefox: removes the inner border shown on focus */
-.btn::-moz-focus-inner {
-    border: none;
-}
-
-/* make sure we have a visible focus ring */
-.btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.5),
-        0 0 0 1.5px rgba(255, 105, 180, 0.5);
-}
-
-.btn-wrapper {
+.player {
+    width: 200px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center
 }
 
-.btn:disabled {
-    border: 1px solid #ccc;
-    background-color: #ccc;
-    color: #666666;
+.player>button {
+    line-height: 1;
+    padding: 8px;
 }
 
-.timer {
+.player-small-btn {
+    width: 40px;
+    height: 40px;
+}
+
+.player-big-btn {
+    width: 80px;
+    height: 80px;
+}
+
+.player-small-btn>svg {
+    width: 24px !important;
+}
+
+svg {
+    pointer-events: none;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.work>svg path {
+    fill: red;
+}
+
+.break>svg path {
+    fill: green;
+}
+
+.text-centered {
     text-align: center;
-    font-size: 80px;
-    line-height: 80px;
-    font-weight: lighter;
-    word-spacing: -.1em;
-    margin: 40px 0;
+}
+
+/*-----------------*/
+
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    margin: 2px 0;
+    border: solid 1px transparent;
+    border-radius: 2px;
+    padding: 0.2em 1em;
+    color: #663399;
+    background-color: #ffffff;
+    outline: none;
+    text-transform: uppercase; 
+}
+
+button.selected {
+    color: #663399;
+    border-color: currentColor;
+    background-color: white;
+    font-weight: bold;
 }

@@ -1,23 +1,41 @@
-import React from "react";
+import React from "react"
+import Icon from "@mdi/react"
+import {
+  mdiReplay,
+  mdiPlayCircleOutline,
+  mdiVolumeHigh,
+  mdiVolumeOff,
+  mdiPauseCircleOutline,
+} from "@mdi/js"
 
-const PomodoroActions = ({isPlaying, startTimer, stopTimer, resetTimer}) => {
-    return (
-        <div className="btn-wrapper">
-            <button 
-                className="btn btn-bottom btn-start" 
-                disabled={isPlaying} 
-                onClick={startTimer}
-            >
-                Start
-            </button>
-            <button className="btn btn-bottom btn-stop" onClick={stopTimer}>
-                Stop
-            </button>
-            <button className="btn btn-bottom btn-reset" onClick={resetTimer}>
-                Reset
-            </button>
-        </div>
-    )
+const PomodoroActions = ({
+  isPlaying,
+  isAlarming,
+  toggleAlarm,
+  startTimer,
+  stopTimer,
+  resetTimer,
+}) => {
+  return (
+    <div className="player-container">
+      <div className="player">
+        <button className="player-small-btn" onClick={resetTimer}>
+          <Icon path={mdiReplay} />
+        </button>
+        <button
+          onClick={isPlaying ? stopTimer : startTimer}
+          className="player-big-btn"
+        >
+          <Icon
+            path={isPlaying ? mdiPauseCircleOutline : mdiPlayCircleOutline}
+          />
+        </button>
+        <button className="player-small-btn" onClick={toggleAlarm}>
+          <Icon path={isAlarming ? mdiVolumeHigh : mdiVolumeOff} />
+        </button>
+      </div>
+    </div>
+  )
 }
 
-export default PomodoroActions;
+export default PomodoroActions

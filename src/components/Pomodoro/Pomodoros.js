@@ -1,36 +1,31 @@
-import React from "react";
-import { format } from "../../utils";
+import React from "react"
 
 const pomodoros = [
-    {
-        name: "Pomodoro",
-        time: 1500
-    },
-    {
-        name: "Long Break",
-        time: 600
-    },
-    {
-        name: "Short Break",
-        time: 300
-    }
-];
+  {
+    name: "Work",
+    time: 1500,
+  },
+  {
+    name: "Break",
+    time: 600,
+  },
+]
 
-const Pomodoros = ({resetTimer, timer}) => {
-    return (
-        <div className="btn-wrapper">
-          {
-              pomodoros.map((pomodoro, index) => (
-              <button
-                key={index}
-                className="btn"
-                onClick={e => resetTimer(e, pomodoro.time, true)}
-              >
-                {timer === pomodoro.time ? `${pomodoro.name} (${format(timer)})` : pomodoro.name}
-              </button>))
-          }
-        </div>      
-    );
+const Pomodoros = ({ resetTimer, timer }) => {
+  return (
+    <div className="btn-wrapper">
+      {pomodoros.map((pomodoro, index) => (
+        <button
+          className={`btn ${timer === pomodoro.time ? "selected" : ""}`}
+          key={index}
+          style={{ padding: "0 8px" }}
+          onClick={e => resetTimer(e, pomodoro.time, true)}
+        >
+          {pomodoro.name}
+        </button>
+      ))}
+    </div>
+  )
 }
 
-export default Pomodoros;
+export default Pomodoros
