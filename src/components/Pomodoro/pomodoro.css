@@ -1,10 +1,59 @@
-.container {
+.page-container {
+    position: relative;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.topbar {
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    width: 100%;
+    z-index: 1000;
+}
+
+.topbar::after {
+    bottom: -5px;
+    box-shadow: inset 0px 4px 8px -3px rgba(17, 17, 17, .06);
+    content: "";
+    height: 5px;
+    left: 0px;
+    opacity: 1;
+    pointer-events: none;
+    position: absolute;
+    right: 0px;
+    width: 100%;
+    z-index: 2050;
+}
+
+.topbar-inner {
+    margin: 0px auto;
+    max-width: 960px;
+    padding: 1.45rem 1.0875rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 960;
+    padding: 1.45rem 1rem;
+}
+
+.box {
+    text-align: center;
     border-radius: 6px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
     max-width: 500px;
     overflow: hidden;
     padding: 20px 8px;
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 
 .timer {
@@ -43,30 +92,12 @@
     height: 80px;
 }
 
-.player-small-btn>svg {
-    width: 24px !important;
-}
-
 svg {
     pointer-events: none;
     display: inline-block;
     width: 100%;
     height: 100%;
 }
-
-.work>svg path {
-    fill: red;
-}
-
-.break>svg path {
-    fill: green;
-}
-
-.text-centered {
-    text-align: center;
-}
-
-/*-----------------*/
 
 button {
     padding: 0;
@@ -84,16 +115,15 @@ button {
     margin: 2px 0;
     border: solid 1px transparent;
     border-radius: 2px;
-    padding: 0.2em 1em;
-    color: #663399;
-    background-color: #ffffff;
     outline: none;
-    text-transform: uppercase; 
+    text-transform: uppercase;
+}
+
+.btn-item {
+    padding: 0 8px;
 }
 
 button.selected {
-    color: #663399;
     border-color: currentColor;
-    background-color: white;
     font-weight: bold;
 }
