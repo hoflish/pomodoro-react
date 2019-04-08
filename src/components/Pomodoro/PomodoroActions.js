@@ -3,12 +3,12 @@ import Icon from "@mdi/react"
 import {
   mdiReplay,
   mdiPlayCircleOutline,
-  mdiVolumeHigh,
-  mdiVolumeOff,
+  mdiAlarm,
+  mdiAlarmOff,
   mdiPauseCircleOutline,
 } from "@mdi/js"
 
-import ThemeContext from "../Theme/context"
+import { ThemeContext } from "../Theme/context"
 
 const PomodoroActions = ({
   isPlaying,
@@ -25,7 +25,7 @@ const PomodoroActions = ({
 
         return (
           <div className="player-container">
-            <div className={`player ${theme}`}>
+            <div className="player">
               <button className="player-small-btn" onClick={resetTimer}>
                 <Icon path={mdiReplay} color={iconColor} />
               </button>
@@ -42,7 +42,7 @@ const PomodoroActions = ({
               </button>
               <button className="player-small-btn" onClick={toggleAlarm}>
                 <Icon
-                  path={isAlarming ? mdiVolumeHigh : mdiVolumeOff}
+                  path={isAlarming ? mdiAlarm : mdiAlarmOff}
                   color={iconColor}
                 />
               </button>
