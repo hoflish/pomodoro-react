@@ -7,7 +7,7 @@ import { Pomodoro } from "../components/Pomodoro"
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `pomodoro`, `react`]} />
-    <Pomodoro defaultPomodoro={1500} />
+    <Pomodoro defaultPomodoro={1500} defaultStart={false}/>
   </Layout>
 )
 

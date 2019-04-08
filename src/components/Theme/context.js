@@ -23,6 +23,4 @@ export const defaultContext = {
   },
 }
 
-const ThemeContext = React.createContext(defaultContext.light)
-
-export default ThemeContext
+export const ThemeContext = React.createContext(defaultContext.light)
