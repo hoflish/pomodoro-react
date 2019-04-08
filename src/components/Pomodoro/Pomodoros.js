@@ -2,15 +2,15 @@ import React from "react"
 
 const pomodoros = [
   {
-    name: "Pomodoro",
+    name: "25 MIN",
     time: 1500,
   },
   {
-    name: "Long Break",
+    name: "10 MIN",
     time: 600,
   },
   {
-    name: "Short Break",
+    name: "5 MIN",
     time: 300,
   }
 ]
