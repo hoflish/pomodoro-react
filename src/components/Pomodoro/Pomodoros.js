@@ -8,18 +8,23 @@ const pomodoros = [
   {
     name: "Break",
     time: 600,
-  },
+  }
 ]
 
-const Pomodoros = ({ resetTimer, timer }) => {
+const Pomodoros = ({ resetTimer, currentPomodoro, theme }) => {
   return (
-    <div className="btn-wrapper">
+    <div>
       {pomodoros.map((pomodoro, index) => (
         <button
-          className={`btn ${timer === pomodoro.time ? "selected" : ""}`}
+          className={`btn btn-item ${
+            currentPomodoro === pomodoro.time ? "selected" : ""
+          }`}
           key={index}
-          style={{ padding: "0 8px" }}
-          onClick={e => resetTimer(e, pomodoro.time, true)}
+          style={{
+            color: theme.fontColor,
+            backgroundColor: theme.bodyBg,
+          }}
+          onClick={e => resetTimer(e, pomodoro.time)}
         >
           {pomodoro.name}
         </button>

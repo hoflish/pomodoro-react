@@ -8,6 +8,8 @@ import {
   mdiPauseCircleOutline,
 } from "@mdi/js"
 
+import ThemeContext from "../Theme/context"
+
 const PomodoroActions = ({
   isPlaying,
   isAlarming,
@@ -17,24 +19,38 @@ const PomodoroActions = ({
   resetTimer,
 }) => {
   return (
-    <div className="player-container">
-      <div className="player">
-        <button className="player-small-btn" onClick={resetTimer}>
-          <Icon path={mdiReplay} />
-        </button>
-        <button
-          onClick={isPlaying ? stopTimer : startTimer}
-          className="player-big-btn"
-        >
-          <Icon
-            path={isPlaying ? mdiPauseCircleOutline : mdiPlayCircleOutline}
-          />
-        </button>
-        <button className="player-small-btn" onClick={toggleAlarm}>
-          <Icon path={isAlarming ? mdiVolumeHigh : mdiVolumeOff} />
-        </button>
-      </div>
-    </div>
+    <ThemeContext.Consumer>
+      {theme => {
+        const iconColor = theme.iconColor
+
+        return (
+          <div className="player-container">
+            <div className={`player ${theme}`}>
+              <button className="player-small-btn" onClick={resetTimer}>
+                <Icon path={mdiReplay} color={iconColor} />
+              </button>
+              <button
+                onClick={isPlaying ? stopTimer : startTimer}
+                className="player-big-btn"
+              >
+                <Icon
+                  path={
+                    isPlaying ? mdiPauseCircleOutline : mdiPlayCircleOutline
+                  }
+                  color={iconColor}
+                />
+              </button>
+              <button className="player-small-btn" onClick={toggleAlarm}>
+                <Icon
+                  path={isAlarming ? mdiVolumeHigh : mdiVolumeOff}
+                  color={iconColor}
+                />
+              </button>
+            </div>
+          </div>
+        )
+      }}
+    </ThemeContext.Consumer>
   )
 }
 
