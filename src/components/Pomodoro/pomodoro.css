@@ -112,7 +112,7 @@ button {
     display: inline-block;
     text-align: center;
     text-decoration: none;
-    margin: 2px 0;
+    margin: 1px 0;
     border: solid 1px transparent;
     border-radius: 2px;
     outline: none;
@@ -126,4 +126,13 @@ button {
 button.selected {
     border-color: currentColor;
     font-weight: bold;
+}
+
+.pomodoros {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 0 1px;
+    border-radius: 2px;
 }

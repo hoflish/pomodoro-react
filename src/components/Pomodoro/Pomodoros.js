@@ -2,24 +2,28 @@ import React from "react"
 
 const pomodoros = [
   {
-    name: "Work",
+    name: "25 MIN",
     time: 1500,
   },
   {
-    name: "Break",
+    name: "10 MIN",
     time: 600,
+  },
+  {
+    name: "5 MIN",
+    time: 300,
   }
 ]
 
 const Pomodoros = ({ resetTimer, currentPomodoro, theme }) => {
   return (
-    <div>
+    <div className="pomodoros">
       {pomodoros.map((pomodoro, index) => (
         <button
+          key={index}
           className={`btn btn-item ${
             currentPomodoro === pomodoro.time ? "selected" : ""
           }`}
-          key={index}
           style={{
             color: theme.fontColor,
             backgroundColor: theme.bodyBg,
@@ -33,4 +37,4 @@ const Pomodoros = ({ resetTimer, currentPomodoro, theme }) => {
   )
 }
 
-export default Pomodoros
+export default Pomodoros;
