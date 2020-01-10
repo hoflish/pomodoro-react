@@ -13,7 +13,7 @@ import "./pomodoro.css"
 export default class Pomodoro extends Component {
   static propTypes = {
     defaultPomodoro: PropTypes.number.isRequired,
-    defaultStart: PropTypes.bool.isRequired
+    defaultStart: PropTypes.bool.isRequired,
   }
 
   constructor(props) {
@@ -84,7 +84,7 @@ export default class Pomodoro extends Component {
   }
 
   resetTimer = (e, time = this.state.pomodoro, start = false) => {
-    clearInterval(this.intervel)    
+    clearInterval(this.intervel)
     this.setState({ time, pomodoro: time, isPlaying: false }, () => {
       if (start) this.startTimer()
     })
@@ -107,43 +107,39 @@ export default class Pomodoro extends Component {
     return (
       <ThemeContext.Consumer>
         {theme => (
-          <main
-            className="content box"
-            style={{ backgroundColor: theme.contentBg }}
-          >
-            <Helmet>
-              <title>
-                {isPlaying
-                  ? `${formatedTime} | Pomodoro Timer`
-                  : "Pomodoro Timer"}
-              </title>
-            </Helmet>
-            <Pomodoros
-              currentPomodoro={pomodoro}
-              resetTimer={this.resetTimer}
-              theme={theme}              
-            />
-            <div 
-              className="timer" 
-              style={{color: theme.timerColor}}
-            >
-              {formatedTime}
+          <main style={{ backgroundColor: theme.contentBg, flex: "auto" }}>
+            <div className="content box">
+              <Helmet>
+                <title>
+                  {isPlaying
+                    ? `${formatedTime} | Pomodoro Timer`
+                    : "Pomodoro Timer"}
+                </title>
+              </Helmet>
+              <Pomodoros
+                currentPomodoro={pomodoro}
+                resetTimer={this.resetTimer}
+                theme={theme}
+              />
+              <div className="timer" style={{ color: theme.timerColor }}>
+                {formatedTime}
+              </div>
+              <PomodoroActions
+                isPlaying={isPlaying}
+                isAlarming={isAlarming}
+                toggleAlarm={this.toggleAlarm}
+                startTimer={this.startTimer}
+                stopTimer={this.stopTimer}
+                resetTimer={this.resetTimer}
+              />
+              <audio
+                src={alarm}
+                type="audio/mpeg"
+                ref={audio => {
+                  this.audio = audio
+                }}
+              />
             </div>
-            <PomodoroActions
-              isPlaying={isPlaying}
-              isAlarming={isAlarming}
-              toggleAlarm={this.toggleAlarm}
-              startTimer={this.startTimer}
-              stopTimer={this.stopTimer}
-              resetTimer={this.resetTimer}
-            />
-            <audio
-              src={alarm}
-              type="audio/mpeg"
-              ref={audio => {
-                this.audio = audio
-              }}
-            />
           </main>
         )}
       </ThemeContext.Consumer>

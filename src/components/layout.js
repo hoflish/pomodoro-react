@@ -10,7 +10,8 @@ import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 
 import { ThemeContext, defaultContext } from "./Theme/context"
-import Header from "./header"
+import Header from "./Header"
+import Footer from "./Footer";
 
 import "./layout.css"
 
@@ -47,7 +48,11 @@ class Layout extends React.Component {
           render={data => (
             <div
               className="page-container"
-              style={{ backgroundColor: themeValue.bodyBg }}
+              style={{
+                backgroundColor: themeValue.bodyBg,
+                display: "flex",
+                flexDirection: "column",
+              }}
             >
               <Header
                 isLightTheme={isLightTheme}
@@ -55,7 +60,7 @@ class Layout extends React.Component {
                 siteTitle={data.site.siteMetadata.title}
               />
               {this.props.children}
-              <footer />
+              <Footer />
             </div>
           )}
         />
