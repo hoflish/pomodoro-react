@@ -9,11 +9,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 
-import { ThemeContext, defaultContext } from "./Theme/context"
 import Header from "./Header"
-import Footer from "./Footer";
+import Footer from "./Footer"
 
 import "./layout.css"
+import { useTheme } from "../contexts/theme"
 
 const SITE_TITLE_QUERY = graphql`
   query SiteTitleQuery {
@@ -25,48 +25,32 @@ const SITE_TITLE_QUERY = graphql`
   }
 `
 
-class Layout extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLightTheme: true,
-    }
-  }
-
-  toggleTheme = () => {
-    this.setState(({ isLightTheme }) => ({ isLightTheme: !isLightTheme }))
-  }
-
-  render() {
-    const { isLightTheme } = this.state
-    const themeValue = defaultContext[isLightTheme ? "light" : "dark"]
-
-    return (
-      <ThemeContext.Provider value={themeValue}>
-        <StaticQuery
-          query={SITE_TITLE_QUERY}
-          render={data => (
-            <div
-              className="page-container"
-              style={{
-                backgroundColor: themeValue.bodyBg,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <Header
-                isLightTheme={isLightTheme}
-                toggleTheme={this.toggleTheme}
-                siteTitle={data.site.siteMetadata.title}
-              />
-              {this.props.children}
-              <Footer />
-            </div>
-          )}
-        />
-      </ThemeContext.Provider>
-    )
-  }
+const Layout = ({ children }) => {
+  const { theme, dark, toggle } = useTheme()
+  return (
+    <StaticQuery
+      query={SITE_TITLE_QUERY}
+      render={data => (
+        <div
+          className="page-container"
+          style={{
+            backgroundColor: theme.bodyBg,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Header
+            theme={theme}
+            isLightTheme={!dark}
+            toggleTheme={toggle}
+            siteTitle={data.site.siteMetadata.title}
+          />
+          {children}
+          <Footer />
+        </div>
+      )}
+    />
+  )
 }
 
 Layout.propTypes = {
