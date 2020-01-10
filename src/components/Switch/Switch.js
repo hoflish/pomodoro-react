@@ -4,7 +4,7 @@ import "./switch.css"
 
 export default class Switch extends React.Component {
   render() {
-    const { on, className = "", ...props } = this.props
+    const { on, className = "", ...rest } = this.props
     const btnClassName = [
       className,
       "toggle-btn",
@@ -22,7 +22,7 @@ export default class Switch extends React.Component {
             // changing is handled by clicking the button
           }}
         />
-        <button className={btnClassName} aria-label="Toggle" {...props} />
+        <button className={btnClassName} aria-label="Toggle" {...rest} />
       </div>
     )
   }

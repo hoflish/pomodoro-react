@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 
 import { format } from "../../utils"
-import { ThemeContext } from "../Theme/context"
+import { ThemeConsumer } from "../../contexts/theme"
 import Pomodoros from "./Pomodoros"
 import PomodoroActions from "./PomodoroActions"
 
@@ -105,8 +105,8 @@ export default class Pomodoro extends Component {
     const formatedTime = format(time)
 
     return (
-      <ThemeContext.Consumer>
-        {theme => (
+      <ThemeConsumer>
+        {({ theme }) => (
           <main style={{ backgroundColor: theme.contentBg, flex: "auto" }}>
             <div className="content box">
               <Helmet>
@@ -125,6 +125,7 @@ export default class Pomodoro extends Component {
                 {formatedTime}
               </div>
               <PomodoroActions
+                theme={theme}
                 isPlaying={isPlaying}
                 isAlarming={isAlarming}
                 toggleAlarm={this.toggleAlarm}
@@ -142,7 +143,7 @@ export default class Pomodoro extends Component {
             </div>
           </main>
         )}
-      </ThemeContext.Consumer>
+      </ThemeConsumer>
     )
   }
 }
