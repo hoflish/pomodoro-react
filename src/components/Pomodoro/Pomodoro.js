@@ -25,9 +25,6 @@ export default class Pomodoro extends Component {
     }
   }
 
-  audio = new Audio(buildUrl("alarm.mp3", "video"))
-  interval = null
-
   componentDidMount() {
     this.notify()
   }
@@ -152,6 +149,10 @@ export default class Pomodoro extends Component {
                 startTimer={this.startTimer}
                 stopTimer={this.stopTimer}
                 resetTimer={this.resetTimer}
+              />
+              <audio
+                src={buildUrl("alarm.mp3", "video")}
+                ref={audio => (this.audio = audio)}
               />
             </div>
           </main>
