@@ -1,5 +1,6 @@
 import React from "react"
 import MDIcon from "@mdi/react"
+import { useTheme } from "../contexts/theme"
 
 let MDIcons
 
@@ -23,6 +24,9 @@ try {
 }
 
 const Icon = ({ name, color, size = 1, ...rest }) => {
+  const { theme } = useTheme()
+  const iconColor = color || theme.fontColor
+
   if (!name) return null
 
   if (typeof name === "string") {
@@ -32,7 +36,11 @@ const Icon = ({ name, color, size = 1, ...rest }) => {
       console.warn(`The icon '${name}' does not exist in '@mdi/js'`)
       return (
         <span
-          style={{ color, width: `${size}rem`, height: `${size}rem` }}
+          style={{
+            color: iconColor,
+            width: `${size}rem`,
+            height: `${size}rem`,
+          }}
           {...rest}
         >
           □
@@ -40,11 +48,11 @@ const Icon = ({ name, color, size = 1, ...rest }) => {
       )
     }
 
-    return <MDIcon path={path} color={color} size={size} {...rest} />
+    return <MDIcon path={path} color={iconColor} size={size} {...rest} />
   }
   return (
     <span
-      style={{ color, width: `${size}rem`, height: `${size}rem` }}
+      style={{ color: iconColor, width: `${size}rem`, height: `${size}rem` }}
       {...rest}
     >
       □

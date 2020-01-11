@@ -1,8 +1,7 @@
 import React from "react"
 import Icon from "../Icon"
 
-const PomodoroActions = ({
-  theme,
+const PomodoroFooter = ({
   isPlaying,
   isAlarming,
   toggleAlarm,
@@ -14,7 +13,7 @@ const PomodoroActions = ({
     <div className="player-container">
       <div className="player">
         <button className="player-small-btn" onClick={resetTimer}>
-          <Icon name="replay" color={theme.iconColor} />
+          <Icon name="replay" />
         </button>
         <button
           onClick={isPlaying ? stopTimer : startTimer}
@@ -22,19 +21,15 @@ const PomodoroActions = ({
         >
           <Icon
             name={isPlaying ? "pauseCircleOutline" : "playCircleOutline"}
-            color={theme.iconColor}
             size={2.5}
           />
         </button>
         <button className="player-small-btn" onClick={toggleAlarm}>
-          <Icon
-            name={isAlarming ? "alarm" : "alarmOff"}
-            color={theme.iconColor}
-          />
+          <Icon name={isAlarming ? "alarm" : "alarmOff"} />
         </button>
       </div>
     </div>
   )
 }
 
-export default PomodoroActions
+export default PomodoroFooter

@@ -10,7 +10,7 @@ const IndexPage = () => {
     <ThemeProvider>
       <Layout>
         <SEO title="Home" keywords={[`gatsby`, `pomodoro`, `react`]} />
-        <Pomodoro defaultPomodoro={1500} defaultStart={false} />
+        <Pomodoro defaultPomodoro={1500} />
       </Layout>
     </ThemeProvider>
   )
