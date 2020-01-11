@@ -6,3 +6,7 @@ export const format = timeInSeconds => {
   const timeFormated = leftPad(minutes) + ":" + leftPad(seconds)
   return timeFormated
 }
+
+export const buildUrl = (asset, type = "image") => {
+  return `https://res.cloudinary.com/hoflish/${type}/upload/${asset}`
+}

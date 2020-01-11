@@ -2,18 +2,16 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 
-import { format } from "../../utils"
+import { format, buildUrl } from "../../utils"
 import { ThemeConsumer } from "../../contexts/theme"
-import Pomodoros from "./Pomodoros"
-import PomodoroActions from "./PomodoroActions"
+import PomodoroHeader from "./PomodoroHeader"
+import PomodoroFooter from "./PomodoroFooter"
 
-import alarm from "../../assets/alarm.mp3"
 import "./pomodoro.css"
 
 export default class Pomodoro extends Component {
   static propTypes = {
     defaultPomodoro: PropTypes.number.isRequired,
-    defaultStart: PropTypes.bool.isRequired,
   }
 
   constructor(props) {
@@ -21,21 +19,23 @@ export default class Pomodoro extends Component {
     this.state = {
       time: props.defaultPomodoro,
       pomodoro: props.defaultPomodoro,
-      isPlaying: props.defaultStart,
+      isPlaying: false,
       isAlarming: true,
       isNotifying: false,
     }
   }
 
+  audio = new Audio(buildUrl("alarm.mp3", "video"))
+  interval = null
+
   componentDidMount() {
-    if (this.state.isPlaying) {
-      this.startTimer()
-    }
     this.notify()
   }
 
   componentWillUnmount = () => {
-    clearInterval(this.intervel)
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
   }
 
   notify() {
@@ -54,37 +54,58 @@ export default class Pomodoro extends Component {
 
   startTimer = () => {
     const { time } = this.state
-    this.setState({ isPlaying: true })
     const timeTillRun = Date.now() + time * 1000
-    this.intervel = setInterval(() => this.tick(timeTillRun), 1000)
+
+    if (time === -0) {
+      return
+    }
+
+    this.setState({ isPlaying: true }, () => {
+      this.interval = setInterval(() => this.tick(timeTillRun), 1000)
+    })
   }
 
-  tick = timeTillRun => {
-    const left = Math.round((timeTillRun - Date.now()) / 1000)
+  tick = time => {
+    const left = Math.round((time - Date.now()) / 1000)
+    if (left < 0 && !this.state.isPlaying) {
+      return
+    }
+
     if (left < 0) {
       const { isAlarming, isNotifying } = this.state
-      clearInterval(this.intervel)
+      this.stopTimer()
+
       if (isAlarming) {
         this.audio.play()
       }
+
       if (isNotifying) {
-        new Notification("Timer is Up!", {
+        const options = {
           body: "Reset your timer now",
-          icon: "./tomato.png",
-        })
+          icon: buildUrl("tomato.png"),
+          vibrate: isAlarming ? [] : [200, 100, 200],
+        }
+
+        return new Notification("Timer is Up!", options)
       }
+
       return
     }
     this.setState({ time: left })
   }
 
   stopTimer = () => {
-    clearInterval(this.intervel)
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
     this.setState({ isPlaying: false })
   }
 
   resetTimer = (e, time = this.state.pomodoro, start = false) => {
-    clearInterval(this.intervel)
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+
     this.setState({ time, pomodoro: time, isPlaying: false }, () => {
       if (start) this.startTimer()
     })
@@ -107,7 +128,7 @@ export default class Pomodoro extends Component {
     return (
       <ThemeConsumer>
         {({ theme }) => (
-          <main style={{ backgroundColor: theme.contentBg, flex: "auto" }}>
+          <main style={{ backgroundColor: theme.background, flex: "auto" }}>
             <div className="content box">
               <Helmet>
                 <title>
@@ -116,7 +137,7 @@ export default class Pomodoro extends Component {
                     : "Pomodoro Timer"}
                 </title>
               </Helmet>
-              <Pomodoros
+              <PomodoroHeader
                 currentPomodoro={pomodoro}
                 resetTimer={this.resetTimer}
                 theme={theme}
@@ -124,21 +145,13 @@ export default class Pomodoro extends Component {
               <div className="timer" style={{ color: theme.timerColor }}>
                 {formatedTime}
               </div>
-              <PomodoroActions
-                theme={theme}
+              <PomodoroFooter
                 isPlaying={isPlaying}
                 isAlarming={isAlarming}
                 toggleAlarm={this.toggleAlarm}
                 startTimer={this.startTimer}
                 stopTimer={this.stopTimer}
                 resetTimer={this.resetTimer}
-              />
-              <audio
-                src={alarm}
-                type="audio/mpeg"
-                ref={audio => {
-                  this.audio = audio
-                }}
               />
             </div>
           </main>

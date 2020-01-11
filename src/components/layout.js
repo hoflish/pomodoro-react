@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
         <div
           className="page-container"
           style={{
-            backgroundColor: theme.bodyBg,
+            backgroundColor: theme.background,
             display: "flex",
             flexDirection: "column",
           }}
@@ -46,7 +46,7 @@ const Layout = ({ children }) => {
             siteTitle={data.site.siteMetadata.title}
           />
           {children}
-          <Footer />
+          <Footer theme={theme}/>
         </div>
       )}
     />

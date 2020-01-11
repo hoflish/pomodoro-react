@@ -115,7 +115,6 @@ button {
     border: solid 1px transparent;
     border-radius: 2px;
     outline: none;
-    text-transform: uppercase;
 }
 
 .btn-item {

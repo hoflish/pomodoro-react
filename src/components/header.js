@@ -6,12 +6,7 @@ import { Switch } from "./Switch"
 
 const Header = ({ siteTitle, theme, isLightTheme, toggleTheme }) => {
   return (
-    <header
-      className="topbar"
-      style={{
-        background: theme.headerBg,
-      }}
-    >
+    <header className="topbar">
       <div className="topbar-inner">
         <h1 style={{ margin: 0 }}>
           <Link
